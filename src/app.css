@@ -1,0 +1,38 @@
+.text-center{
+    text-align: center;
+}
+
+.margin-lr-10{
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.margin-tb-10{
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.block-element{
+    display:block;
+}
+
+.no-style-list{
+    list-style: none;
+}
+
+.no-padding{
+    padding: 0px;
+}
+
+.no-style-and-padding{
+    composes: no-padding;
+    composes: no-style-list;
+    composes: margin-lr-10;
+}
+
+.block-with-margin-lr{
+    composes: block-element;
+    composes: margin-lr-10;
+    composes: margin-tb-10;
+}
+
