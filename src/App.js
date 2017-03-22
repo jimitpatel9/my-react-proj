@@ -1,6 +1,7 @@
-import React, {Component} from 'react';
+import React from 'react';
 import CSSModules from 'react-css-modules';
 import styles from './app.css';
+import UserDetailsView from './UserDetailsView'
 
 const GIT_URL_FOR_USER_DETAILS = 'https://api.github.com/users/';
 
@@ -11,8 +12,8 @@ class App extends React.Component {
 
         this.state = {
             userName: '',
-            userDataKeys: [],
-            userData: ''
+            userDetails: {},
+            getInfoClicked: false
         };
 
         this.update = this.update.bind(this);
@@ -33,7 +34,7 @@ class App extends React.Component {
     getGithubInfo() {
         fetch(GIT_URL_FOR_USER_DETAILS + this.state.userName)
             .then((response) => response.json())
-            .then((userDetails) => this.setState({userDataKeys: Object.keys(userDetails), userData: userDetails}))
+            .then((userDetails) => this.setState({userDetails: userDetails, getInfoClicked: true}))
     }
 
     render() {
@@ -47,11 +48,7 @@ class App extends React.Component {
                        styleName="margin-lr-10" />
                 <button styleName="margin-lr-10"
                         onClick={this.getGithubInfo}>Get Info</button>
-                <ul styleName="no-style-and-padding">
-                    {this.state.userDataKeys.map((key) => {
-                        return <li key={key}>{key} : {this.state.userData[key]}</li>;
-                    })}
-                </ul>
+                {this.state.getInfoClicked ? <UserDetailsView userDetails={this.state.userDetails} />: null}
             </div>
         );
     }
